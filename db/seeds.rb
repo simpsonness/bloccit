@@ -33,8 +33,7 @@ rand(4..10).times do
 
     topics.rotate! # add this line to move the first topic to the last, so that posts get assigned to different topics.
 
-    # comments...
-  end
+    
     rand(3..7).times do
       p.comments.create(
         body: Faker::Lorem.paragraphs(rand(1..2)).join("\n"))
