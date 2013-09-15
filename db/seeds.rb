@@ -10,19 +10,7 @@ topics = []
   )
 end
 
-rand(5..12).times do
-    topic = topics.first # getting the first topic here
-    p = u.posts.create(
-      topic: topic,
-      title: Faker::Lorem.words(rand(1..10)).join(" "), 
-      body: Faker::Lorem.paragraphs(rand(1..4)).join("\n"))
-    # set the created_at to a time within the past year
-    p.update_attribute(:created_at, Time.now - rand(600..31536000))
 
-    topics.rotate! # add this line to move the first topic to the last, so that posts get assigned to different topics.
-
-    # comments...
-  end
 
 rand(4..10).times do
   password = Faker::Lorem.characters(10)
@@ -35,12 +23,18 @@ rand(4..10).times do
   u.save
 
   rand(5..12).times do
+    topic = topics.first # getting the first topic here
     p = u.posts.create(
+      topic: topic,
       title: Faker::Lorem.words(rand(1..10)).join(" "), 
       body: Faker::Lorem.paragraphs(rand(1..4)).join("\n"))
     # set the created_at to a time within the past year
     p.update_attribute(:created_at, Time.now - rand(600..31536000))
 
+    topics.rotate! # add this line to move the first topic to the last, so that posts get assigned to different topics.
+
+    # comments...
+  end
     rand(3..7).times do
       p.comments.create(
         body: Faker::Lorem.paragraphs(rand(1..2)).join("\n"))
