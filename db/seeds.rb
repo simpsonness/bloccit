@@ -3,7 +3,7 @@ require 'faker'
 
 # Create 15 topics
 topics = []
-50.times do
+5.times do
   topics << Topic.create(
     name: Faker::Lorem.words(rand(1..10)).join(" "), 
     description: Faker::Lorem.paragraph(rand(1..4))
@@ -35,8 +35,10 @@ rand(4..10).times do
 
     
     rand(3..7).times do
-      p.comments.create(
+      comment = p.comments.new(
         body: Faker::Lorem.paragraphs(rand(1..2)).join("\n"))
+      comment.user = u
+      comment.save
     end
   end
 end
