@@ -7,10 +7,11 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :avatar, :provider, :uid
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :avatar, :provider, :uid, :email_favorites
   has_many :posts
   has_many :comments
   has_many :votes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   # attr_accessible :title, :body
   before_create :set_member
   mount_uploader :avatar, AvatarUploader
@@ -39,7 +40,9 @@ class User < ActiveRecord::Base
     role.nil? ? false : ROLES.index(base_role.to_s) <= ROLES.index(role)
   end 
 
-
+  def favorited(post)
+    self.favorites.where(post_id: post.id).first
+  end
   
   private
 
