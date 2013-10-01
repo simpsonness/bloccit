@@ -25,13 +25,16 @@
     </div>
   <% end %>
 
-  <div class="control-group">
-    <%= f.label :password, class: 'control-label' %>
-    <div class="controls">
-      <%= f.password_field :password %>
-      <i>(leave blank if you don't want to change it)</i>
+  <% unless current_user.provider? %>
+    <div class="control-group">
+      <%= f.label :password, class: 'control-label' %>
+      <div class="controls">
+       <%= f.password_field :password %>
+       <i>(leave blank if you don't want to change it)</i>
+      </div>
     </div>
-  </div>
+  <% end %>
+
   <div class="control-group">
     <%= f.label :password_confirmation, class: 'control-label' %>
     <div class="controls">
@@ -51,6 +54,13 @@
       <%= f.file_field :avatar %>
     </div>
   </div> 
+
+   <div class="control-group">
+     <%= f.label :email_favorites, class: 'control-label' %>
+     <div class="controls"> 
+       <%= f.check_box :email_favorites %>
+     </div>
+   </div>
       
   <div class="control-group">
     <div class="controls">
