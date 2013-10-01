@@ -7,6 +7,7 @@ devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks'
     resources :posts, except: [:index] do
       resources :comments, only: [:create, :destroy] 
         resources :favorites, only: [:create, :destroy]
+          resources :users, only:[:show] #create a route for users#show
       match '/up-vote', to: 'votes#up_vote', as: :up_vote
       match '/down-vote', to: 'votes#down_vote', as: :down_vote
     end
