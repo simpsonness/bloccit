@@ -3,6 +3,7 @@
  *= require_tree .
  */
 
+@import "bootstrap-custom";
 @import "bootstrap";
 
 .user-info {
@@ -18,5 +19,3 @@
 .voted {
   opacity: 0.5;
 }
-@import "bootstrap-custom";
-@import "bootstrap";
