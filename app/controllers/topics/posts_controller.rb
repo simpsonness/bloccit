@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+class Topics::PostsController < ApplicationController
   def show
     @topic = Topic.find(params[:topic_id])
     authorize! :read, @topic, message: "You need to be signed-in to do that."
