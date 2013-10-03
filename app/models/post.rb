@@ -8,7 +8,7 @@ class Post < ActiveRecord::Base
   after_create :create_vote
 
   default_scope order('rank DESC')
-  scope :visible_to, lambda { |user| user ? scoped : joins(:topic).where('topics.public = true') }
+  scope :visible_to, lambda { |user| user ? scoped : joins(:topic).where('topics.public' => true) }
   default_scope order('created_at DESC')
 
   validates :title, length: { minimum: 5 }, presence: true
