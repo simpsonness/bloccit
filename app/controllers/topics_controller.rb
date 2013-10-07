@@ -8,6 +8,11 @@ class TopicsController < ApplicationController
     authorize! :create, @topic, message: "You need to be an admin to do that."
   end
 
+  def edit
+    @topic = Topic.find(params[:id])
+    authorize! :update, @topic, message: "You need to be an admin to do that."
+  end
+
   def show
     @topic = Topic.find(params[:id])
     authorize! :read, @topic, message: "You need to be signed-in to do that."

@@ -1,9 +1,12 @@
 class CommentsController < ApplicationController
+  respond_to :html, :js
   def create
     @post = Post.find(params[:post_id])
     @topic = @post.topic
     @comment = current_user.comments.build(params[:comment])
     @comment.post = @post
+
+    
 
     if @comment.save
       flash[:notice] = "Comment was saved."
@@ -22,11 +25,13 @@ class CommentsController < ApplicationController
 
     authorize! :destroy, @comment, message: "You need to own the comment to delete it."
     if @comment.destroy
-      flash[:notice] = "Comment was removed."
-      redirect_to [@topic, @post]
-    else
-      flash[:error] = "Comment couldn't be deleted. Try again."
-      redirect_to [@topic, @post]
+        flash[:notice] = "Comment was removed."
+       else
+        flash[:error] = "Comment couldn't be deleted. Try again."
+    end
+
+    respond_with(@comment) do |f|
+      f.html {redirect_to [@topic, @post]}
     end
   end
 end

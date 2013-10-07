@@ -18,12 +18,11 @@
 $(document).ready(function() {
   $(".js-show-hide").click(function() {
     var selector = "." +$(this).attr('data-selector');
-   if ($(selector).is(":visible")) {
+    if ($(selector).is(":visible")) {
       $(selector).slideUp();
-   }
-   else{
+    } else {
       $(selector).slideDown();
-   }
-   return false;
+    }
+    return false;
   });
 });

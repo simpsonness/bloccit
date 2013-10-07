@@ -14,16 +14,17 @@
   </div>
 
   <div class="span8">
-    <%= render partial: "posts/comments", locals: { comments: @comments } %>
     <% if can? :create, Comment %>
       <hr/>
-       <a href="#" class="js-show-hide" data-selector="js-new-comment">Add Comment</a>
+        <h2 class='js-comments-count'><%= @comments.count %> Comments</h2>
+        <a href="#" class="js-show-hide" data-selector="js-new-comment">Add Comment</a>
+        <div class="js-new-comment hide">
+          <h4>New Comment</h4>
+          <%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: @comment } %>
+        </div>
+        <%= render partial: 'comments/comment', collection: @comments %>
       <br/>
-      <div class="js-new-comment hide">
-        <h4>New Comment</h4>
-        <%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: @comment } %>
-      </div>
-    <% end %>  
+    <% end %>
   </div>
   
   <div class="span4">
